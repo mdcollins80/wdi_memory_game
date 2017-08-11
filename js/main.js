@@ -1,5 +1,4 @@
 console.log("Up and running!");
-console.log(location);
 
 var cards = [
 	{
@@ -23,17 +22,23 @@ var cards = [
 		cardImage: "images/king-of-diamonds.png"
 	}
 ];
+
+//temporary shuffled version of the cards array to be used in the flipCard function for randomizing the cards.
+var mixedCards = [];
+mixedCards = cards;
+
+
 var cardsInPlay = [];
 
 var flipCard = function () {
 	var cardId = this.getAttribute('data-id');
 	console.log("User flipped " + cards[cardId].rank);
-	cardsInPlay.push(cards[cardId].rank);
+	cardsInPlay.push(mixedCards[cardId].rank);
 
-	console.log(cards[cardId].cardImage);
-	console.log(cards[cardId].suit);
+	console.log(mixedCards[cardId].cardImage);
+	console.log(mixedCards[cardId].suit);
 
-	this.setAttribute('src',cards[cardId].cardImage);
+	this.setAttribute('src',mixedCards[cardId].cardImage);
 
 	if (cardsInPlay.length === 2) {
 		checkForMatch();
@@ -61,3 +66,36 @@ var createBoard = function() {
 
 createBoard();
 
+//Bonus Stuff: 
+
+//For the reset button:
+var reset = function() {
+	location.reload(true);
+}
+
+document.getElementById('reset').addEventListener('click',reset);
+
+//Shuffling code from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+//Fisher-Yates Shuffle
+
+//For shuffling the card images:
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+mixedCards = shuffle(mixedCards);

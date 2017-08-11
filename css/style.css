@@ -95,3 +95,16 @@ img {
 	color: #f15B31;
 	font-weight: 700;
 }
+
+.button {
+	font-family: "Raleway", sans-serif;
+	text-transform: uppercase;
+    background-color: #f15b31; /* Orange */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
